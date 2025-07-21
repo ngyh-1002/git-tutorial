@@ -20,6 +20,14 @@ screen.colormode(255)
 screen.bgcolor(255, 166, 72) # 오목판 색상 (어두운 주황색 계열)
 screen.tracer(0) # 화면 업데이트를 수동으로 제어하여 그리기 속도 향상
 
+# --- 메시지 터틀 설정 ---
+message_turtle = turtle.Turtle()
+message_turtle.hideturtle()
+message_turtle.penup()
+message_turtle.goto(0, screen.window_height() / 2 - 50) # 화면 상단에 위치
+message_turtle.color("red")
+message_turtle.write("흑돌부터 시작!", align="center", font=("Arial", 24, "bold"))
+
 # --- 바둑판 그리기 함수 ---
 def draw_board():
     board_turtle = turtle.Turtle()
@@ -93,7 +101,8 @@ def place_stone(x, y):
     # 승리 판정
     if check_win(grid_x, grid_y, board[grid_y][grid_x]):
         winner = "흑돌" if player_turn == 0 else "백돌"
-        print(f"{winner} 승리!")
+        message_turtle.clear()
+        message_turtle.write(f"{winner} 승리!", align="center", font=("Arial", 24, "bold"))
         # 게임 종료 또는 다시 시작 기능 추가 가능
         screen.onclick(None) # 더 이상 클릭 못하게 함
         return
